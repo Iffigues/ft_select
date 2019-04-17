@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:59:46 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 20:45:10 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/17 22:06:28 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,51 @@
 
 extern t_beg	g_beg;
 
-void	aff(void)
+static void	blank(size_t a, int b, int h, int y)
+{
+	size_t k;
+
+	if (!h && (y + 1 != g_beg.col_size))
+	{
+		k = (size_t)b;
+		while (a < k)
+		{
+			a++;
+			tputs(" ", 1, ft_charz);
+		}
+	}
+}
+
+static void	fiche(int a, int b)
+{
+	int	c;
+	int d;
+	int i;
+
+	if (a + b)
+		;
+	c = 0;
+	d = 0;
+	i = 0;
+	printf("%d\n",a);
+	while (i < g_beg.col_size)
+	{
+		if (c == a)
+		{
+			c = 0;
+			tputs("\n" , 1, ft_charz);
+		}
+		if (g_beg.col[i].live == g_beg.mod)
+		{
+			tputs(g_beg.col[i].name , 1, ft_charz);
+			c++;
+			blank(g_beg.col[i].len, g_beg.max_size, c == a, i);
+		}
+		i++;
+	}
+}
+
+void		aff(void)
 {
 	int 	a;
 	int 	b;
@@ -25,7 +69,7 @@ void	aff(void)
 		if ((a = count_col()) != 0)
 			if ((b = count_raw()) < g_beg.y)
 			{
-				printf("haha\n");			
+				fiche(a, b);
 				return ;
 			}
 	}

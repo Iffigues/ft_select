@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 14:42:58 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 20:34:57 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/17 22:07:09 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void			begin(t_beg *ar)
 	tputs(ar->cap[0].name, 1, ft_charz);
 	ar->index = 0;
 	ar->mod = 1;
-	ar->max_size = sizer(ar->col, ar->col_size);
+	ar->max_size = sizer(ar->col, ar->col_size) + 1;
 	g_beg = *ar;
 	get_size();
 	commence();
