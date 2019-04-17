@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 11:19:34 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 15:08:05 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/17 16:18:52 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		main(int ac, char **av)
 {
 	if (!(isatty(STDERR_FILENO)))
 		return (0);
-//	grab_sign();
+	grab_sign();
 	if (ac-- > 1)
 	{
 		av++;

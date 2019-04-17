@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 14:42:58 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 15:17:26 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/17 16:33:35 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ static size_t	sizer(t_col *col, int nb)
 	return (a);
 }
 
+static void		fleche(unsigned long j)
+{
+	if (j == RIGHT_KEY && g_beg.index < (g_beg.col_size - 1))
+		g_beg.index++;
+	if (j == LEFT_KEY && g_beg.index > 0)
+		g_beg.index--;
+	if (j == UP_KEY && ((g_beg.index + g_beg.x) < g_beg.col_size))
+		g_beg.index += g_beg.x;
+	if (j == DOWN_KEY && ((g_beg.index - g_beg.x) >= 0))
+		g_beg.index -= g_beg.x;
+}
+
 static void		commence(void)
 {
 	char			c[8];
@@ -40,9 +52,8 @@ static void		commence(void)
 	{
 		num = *(unsigned long *)c;
 		if (num == ESC_KEY)
-			exit(0);
-		else
-			printf("%lu\n", num);
+			break ;
+		fleche(num);
 		ft_memset(c, '\0', 8);
 	}
 }
