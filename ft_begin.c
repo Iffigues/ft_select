@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 14:42:58 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 17:37:37 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/17 18:15:45 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ static void		fleche(unsigned long j)
 		g_beg.index++;
 	if (j == LEFT_KEY && g_beg.index > 0)
 		g_beg.index--;
-	if (j == UP_KEY && ((g_beg.index + g_beg.x) < count_nbr()))
-		g_beg.index += g_beg.x;
-	if (j == DOWN_KEY && ((g_beg.index - g_beg.x) >= 0))
-		g_beg.index -= g_beg.x;
+	if (j == UP_KEY && ((g_beg.index + count_col()) < count_nbr()))
+		g_beg.index++;
+	if (j == DOWN_KEY && ((g_beg.index - count_col()) >= 0))
+		g_beg.index--;
+	printf("%d\n", g_beg.index);
 }
 
 static void		action(unsigned long j)
@@ -78,5 +79,6 @@ void			begin(t_beg *ar)
 	ar->mod = 1;
 	ar->max_size = sizer(ar->col, ar->col_size);
 	g_beg = *ar;
+	get_size();
 	commence();
 }

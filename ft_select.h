@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:23:16 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 17:29:07 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/17 18:17:23 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,10 @@ typedef struct		s_beg
 
 int					count_nbr();
 int					ft_charz(int a);
-int					get_size(t_beg *opt);
+int					get_size(void);
 void				ft_libere(t_beg ar);
 void				begin(t_beg *ar);
 void				grab_sign(void);
+int					count_col(void);
 
 #endif

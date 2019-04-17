@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 17:02:39 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 17:30:54 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/17 18:17:20 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,9 @@ int	count_nbr(void)
 		if (g_beg.col[y++].live == a)
 			h++;
 	return (h);
+}
+
+int	count_col(void)
+{
+	return (g_beg.max_size % g_beg.x);
 }
