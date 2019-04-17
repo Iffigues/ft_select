@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 17:02:39 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 18:39:17 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/17 20:34:09 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,20 @@ int	count_nbr(void)
 
 int	count_col(void)
 {
-	return (g_beg.max_size % g_beg.x);
+	return (g_beg.x / g_beg.max_size);
 }
 
 int	count_raw(void)
 {
 	int y;
 	int u;
+	int h;
 
+	h = 0;
 	u = count_nbr();
 	y = count_col();
-	if (u)
-		return (y / u);
-	return (0);
+	if (y)
+		h = (u / y) + 1;
+	h++;
+	return (h);
 }

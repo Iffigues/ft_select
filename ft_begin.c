@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 14:42:58 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 18:32:06 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/17 20:34:57 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void		fleche(unsigned long j)
 		g_beg.index++;
 	if (j == DOWN_KEY && ((g_beg.index - count_col()) >= 0))
 		g_beg.index--;
-	printf("%d\n", count_raw());
+	count_raw();
 }
 
 static void		action(unsigned long j)
@@ -59,6 +59,7 @@ static void		commence(void)
 	unsigned long	num;
 
 	ft_memset(c, '\0', 8);
+	aff();
 	while ((read(STDERR_FILENO, c, 8)) > 0)
 	{
 		num = *(unsigned long *)c;

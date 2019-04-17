@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:23:16 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 18:31:30 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/17 20:34:26 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct		s_beg
 	int				max_size;
 }					t_beg;
 
+void				aff(void);
 int					count_nbr();
 int					count_raw(void);
 int					ft_charz(int a);

@@ -6,12 +6,12 @@
 #    By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/28 19:39:36 by bordenoy          #+#    #+#              #
-#    Updated: 2019/04/17 17:12:27 by bordenoy         ###   ########.fr        #
+#    Updated: 2019/04/17 20:29:00 by bordenoy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=ft_select
-SRC=main.c ft_libere.c ft_begin.c ft_col.c ft_signal.c ft_charz.c ft_count.c
+SRC=main.c ft_libere.c ft_begin.c ft_col.c ft_signal.c ft_charz.c ft_count.c ft_aff.c
 OBJ=$(SRC:.c=.o)
 CC=gcc -Wall -Wextra -Werror
 INCLUDE= -I ./
