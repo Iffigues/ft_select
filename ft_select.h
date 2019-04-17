@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:23:16 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 15:19:12 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/17 17:29:07 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,16 @@
 # define LEFT_KEY	4479771
 # define UP_KEY		4283163
 # define DOWN_KEY	4348699
+# define SPACE		32
+# define DEL		127
+# define DD			2117294875
+# define MODE		5921563
 
 typedef struct		s_col
 {
 	char			*name;
 	int				live;
+	int				choice;
 	size_t			len;
 }					t_col;
 
@@ -42,6 +47,7 @@ typedef struct		s_beg
 	struct termios	newt;
 	int				x;
 	int				y;
+	int				mod;
 	int				index;
 	char			*term;
 	int				atti;
@@ -56,6 +62,7 @@ typedef struct		s_beg
 	int				max_size;
 }					t_beg;
 
+int					count_nbr();
 int					ft_charz(int a);
 int					get_size(t_beg *opt);
 void				ft_libere(t_beg ar);
