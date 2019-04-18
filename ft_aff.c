@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:59:46 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/18 04:03:11 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/18 07:13:25 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,18 @@ static void	blank(size_t a, int b, int h, int y)
 {
 	size_t k;
 
+	k = (size_t)b;
 	if (!h && (y + 1 != g_beg.col_size))
 	{
-		k = (size_t)b;
-		while (a < k)
+		while (a++ < k)
 		{
-			a++;
 			tputs(" ", 1, ft_charz);
 		}
+	}
+	else
+	{
+		while (a++ < k - 1)
+			tputs(" ", 1, ft_charz);
 	}
 }
 
