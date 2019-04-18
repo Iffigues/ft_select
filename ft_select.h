@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:23:16 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 22:03:11 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/18 03:28:21 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <termios.h>
 # include <term.h>
 # include <stdio.h>
+# include <fcntl.h>
 
 # define ESC_KEY	27
 # define RIGHT_KEY	4414235
@@ -52,9 +53,8 @@ typedef struct		s_beg
 	char			*term;
 	int				atti;
 	int				tgent;
-	char			*name;
+	int				tty;
 	int				slot;
-	int				ti;
 	t_col			*col;
 	t_col			cap[8];
 	int				col_size;

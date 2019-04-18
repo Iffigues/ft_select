@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:59:46 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 22:06:28 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/18 03:31:08 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,23 @@ static void	blank(size_t a, int b, int h, int y)
 	}
 }
 
+//#include <curses.h>
+
+static void setcolor(int i)
+{
+	char	*af;
+	char	*g;
+
+	if (i)
+		;
+	af = tgetstr("AF", NULL);
+	g = tgetstr("AB", NULL);
+	//printf("%d",COLOR_GREEN);
+	//exit(0);
+	tputs(tparm(af, 1), 1, ft_charz);
+	tputs(tparm(g, 2), 1, ft_charz);
+}
+
 static void	fiche(int a, int b)
 {
 	int	c;
@@ -40,7 +57,7 @@ static void	fiche(int a, int b)
 	c = 0;
 	d = 0;
 	i = 0;
-	printf("%d\n",a);
+	setcolor(0);
 	while (i < g_beg.col_size)
 	{
 		if (c == a)

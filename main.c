@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 11:19:34 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 21:18:38 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/18 02:31:33 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_col	*ft_beg(t_beg *ar, char **b, int ac)
 {
 	ar->tgent = 0;
 	ar->col = NULL;
-	ar->ti = 0;
 	ar->col_size = ac;
 	ar->col_nbr = ac;
 	tcgetattr(STDERR_FILENO, &ar->oldt);
@@ -44,11 +43,12 @@ t_col	*ft_beg(t_beg *ar, char **b, int ac)
 	ar->newt.c_lflag &= ~ECHO;
 	ar->newt.c_lflag &= ~ICANON;
 	tcsetattr(STDERR_FILENO, 0, &ar->newt);
+	if (!(ar->tty = open(ttyname(0), O_RDWR)))
+		return (NULL);
 	if (!(ar->term = getenv("TERM")))
 		return (NULL);
 	if ((ar->tgent = tgetent(NULL, ar->term)) != 1)
 		return (NULL);
-	ar->ti = setupterm(NULL, STDOUT_FILENO, NULL);
 	return (make_col(b, ac));
 }
 

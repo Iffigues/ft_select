@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 14:42:58 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 22:07:09 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/18 01:23:50 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,14 @@ static void		commence(void)
 
 void			begin(t_beg *ar)
 {
+	char    *reset_cmd;
+
+	reset_cmd = tgetstr("me", NULL);
+	tputs(reset_cmd, 1, ft_charz);
 	ar->cap[0].len = tgetflag("cl");
 	ar->cap[0].name = tgetstr("cl", NULL);
+	ar->cap[1].len = tgetflag("cm");
+	ar->cap[1].name = tgetstr("cm", NULL);
 	tputs(ar->cap[0].name, 1, ft_charz);
 	ar->index = 0;
 	ar->mod = 1;
