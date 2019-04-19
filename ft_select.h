@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 13:23:16 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/19 12:43:20 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/19 19:05:11 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,22 @@
 
 typedef struct		s_col
 {
+	int				index;
 	char			*name;
 	int				live;
 	int				choice;
 	size_t			len;
 }					t_col;
+
+typedef struct      s_bag
+{
+
+	int             index;
+	t_col           *col;
+	int             col_size;
+	int             col_nbr;
+	int             max_size;
+}					t_bag;
 
 typedef struct		s_beg
 {
@@ -49,19 +60,19 @@ typedef struct		s_beg
 	int				x;
 	int				y;
 	int				mod;
-	int				index;
 	char			*term;
 	int				atti;
 	int				tgent;
 	int				tty;
 	int				slot;
-	t_col			*col;
 	t_col			cap[8];
-	int				col_size;
-	int				col_nbr;
-	int				max_size;
+	t_bag			fin;
+	t_bag			tmp;
 }					t_beg;
 
+size_t  			sizer();
+void				change_mod();
+void    			ft_changer();
 void				ft_jump(int a);
 void    			ft_move(int a);
 void				commence(void);

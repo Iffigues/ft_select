@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:59:46 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/19 12:22:33 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/19 18:02:46 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	blank(size_t a, int b, int h, int y)
 	size_t k;
 
 	k = (size_t)b;
-	if (!h && (y + 1 != g_beg.col_size))
+	if (!h && (y + 1 != g_beg.tmp.col_size))
 	{
 		while (a++ < k)
 		{
@@ -42,7 +42,7 @@ static void setcolor(int i)
 	y = 0;
 	af = tgetstr("AF", NULL);
 	g = tgetstr("AB", NULL);
-	if (i == g_beg.index)
+	if (i == g_beg.tmp.index)
 		y = 4;
 	tputs(tparm(af, y), 1, ft_charz);
 	tputs(tparm(g, 2), 1, ft_charz);
@@ -59,19 +59,19 @@ static void	fiche(int a, int b)
 	c = 0;
 	d = 0;
 	i = 0;
-	while (i < g_beg.col_size)
+	while (i < g_beg.tmp.col_size)
 	{
 		if (c == a)
 		{
 			c = 0;
 			tputs("\n" , 1, ft_charz);
 		}
-		if (g_beg.col[i].live == g_beg.mod)
+		if (g_beg.tmp.col[i].live == g_beg.mod)
 		{
 			setcolor(i);
-			tputs(g_beg.col[i].name , 1, ft_charz);
+			tputs(g_beg.tmp.col[i].name , 1, ft_charz);
 			c++;
-			blank(g_beg.col[i].len, g_beg.max_size, c == a, i);
+			blank(g_beg.tmp.col[i].len, g_beg.tmp.max_size, c == a, i);
 		}
 		i++;
 	}

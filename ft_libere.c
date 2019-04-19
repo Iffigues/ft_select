@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 14:05:34 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/19 13:45:05 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/19 16:39:45 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	ft_libere(t_beg ar)
 	tputs(ar.cap[3].name, 1, ft_charz);
 	tcsetattr(STDERR_FILENO, 0, &ar.oldt);
 	i = 0;
-	if (ar.col)
+	if (ar.fin.col)
 	{
-		while (i < ar.col_size)
+		while (i < ar.fin.col_size)
 		{
-			if (ar.col[i].name)
-				free(ar.col[i].name);
+			if (ar.fin.col[i].name)
+				free(ar.fin.col[i].name);
 			i++;
 		}
-		free(ar.col);
+		free(ar.fin.col);
 	}
 }

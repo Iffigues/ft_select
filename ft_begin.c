@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 14:42:58 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/19 13:45:15 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/19 20:33:37 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,54 +14,82 @@
 
 extern	t_beg g_beg;
 
-static size_t	sizer(t_col *col, int nb)
+size_t	sizer()
 {
 	size_t	a;
 	int		i;
 
 	a = 0;
 	i = 0;
-	while (i < nb)
-	{
-		if (col[i].len > a)
-			a = col[i].len;
-		i++;
-	}
+	if (g_beg.tmp.col)
+		while (i < g_beg.tmp.col_size)
+		{
+			if (g_beg.tmp.col[i].len > a)
+				a = g_beg.tmp.col[i].len;
+			i++;
+		}
 	return (a);
 }
 
 static void		fleche(unsigned long j)
 {
-	if (j == RIGHT_KEY && g_beg.index < (count_nbr() - 1))
+	if (j == RIGHT_KEY)
 	{
 		ft_move(1);
-		aff();
 	}
-	if (j == LEFT_KEY && g_beg.index > 0)
+	if (j == LEFT_KEY && g_beg.tmp.index > 0)
 	{
 		ft_move(-1);
-		aff();
 	}
-	if (j == DOWN_KEY && ((g_beg.index + count_col()) < count_nbr()))
+	if (j == DOWN_KEY && ((g_beg.tmp.index + count_col()) < count_nbr() + 1))
 	{
 		ft_jump(1);
-		aff();
 	}
-	if (j == UP_KEY && ((g_beg.index - count_col()) >= 0))
+	if (j == UP_KEY && ((g_beg.tmp.index - count_col() ) >= 0))
 	{
 		ft_jump(-1);
-		aff();
 	}
 }
 
-static void		action(unsigned long j)
+void			cm(int i)
+{
+	int c;
+
+	c = g_beg.tmp.col[i].index;
+	g_beg.fin.col[c].live = g_beg.fin.col[c].live ^ 1; 
+}
+
+void		mc(int y)
+{
+	int c;
+
+	c = g_beg.tmp.col[y].index;
+	g_beg.fin.col[c].choice = g_beg.fin.col[c].choice ^ 1;
+
+}
+
+static int		action(unsigned long j)
 {
 	if (j == MODE)
+	{
 		g_beg.mod = g_beg.mod ^ 1;
+		g_beg.tmp.index = 0;
+		change_mod();
+		return (1);
+	}
 	if (j == DD || j == DEL)
-		g_beg.col[g_beg.index].live = g_beg.col[g_beg.index].live ^ 1;
+	{
+		cm(g_beg.tmp.index);
+		ft_changer();
+		change_mod();
+		return (1);
+	}
 	if (j == SPACE)
-		g_beg.col[g_beg.index].choice = g_beg.col[g_beg.index].choice ^ 1;
+	{
+		mc(g_beg.tmp.index);
+		return (1);
+	}
+	return (0);
 }
 
 void		commence(void)
@@ -78,6 +106,7 @@ void		commence(void)
 			break ;
 		fleche(num);
 		action(num);
+		aff();
 		ft_memset(c, '\0', 8);
 	}
 }
@@ -97,10 +126,9 @@ void			begin(t_beg *ar)
 	ar->cap[3].len = tgetflag("ve");
 	ar->cap[3].name = tgetstr("ve", NULL);
 	tputs(ar->cap[2].name, 1, ft_charz);
-	ar->index = 0;
 	ar->mod = 1;
-	ar->max_size = sizer(ar->col, ar->col_size) + 1;
 	g_beg = *ar;
 	get_size();
+	change_mod();
 	commence();
 }

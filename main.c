@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 11:19:34 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/18 02:31:33 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/19 18:24:48 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ t_col	*make_col(char **b, int ac)
 {
 	t_col	*p;
 	int		i;
+	int		h;
 
 	i = 0;
+	h = 0;
 	if (!(p = (t_col *)malloc(sizeof(t_col) * ac)))
 		return (NULL);
 	while (b[i])
 	{
+		p[i].index = h++; 
 		p[i].live = 1;
 		p[i].len = ft_strlen(b[i]);
 		p[i].name = ft_strdup(b[i]);
@@ -35,9 +38,10 @@ t_col	*make_col(char **b, int ac)
 t_col	*ft_beg(t_beg *ar, char **b, int ac)
 {
 	ar->tgent = 0;
-	ar->col = NULL;
-	ar->col_size = ac;
-	ar->col_nbr = ac;
+	ar->fin.col = NULL;
+	ar->mod = 1;
+	ar->fin.col_size = ac;
+	ar->fin.col_nbr = ac;
 	tcgetattr(STDERR_FILENO, &ar->oldt);
 	ar->newt = ar->oldt;
 	ar->newt.c_lflag &= ~ECHO;
@@ -64,7 +68,7 @@ void	check_error(t_beg ar)
 		ft_putstr("Error to initialize tgetent\n");
 		exit(0);
 	}
-	if (ar.col == NULL)
+	if (ar.fin.col == NULL)
 	{
 		ft_putstr("Not Enougth Place\n");
 		exit(0);
@@ -77,7 +81,8 @@ void	start(char **b, int ac)
 
 	if (*b == NULL)
 		return ;
-	ar.col = ft_beg(&ar, b, ac);
+	ar.fin.col = ft_beg(&ar, b, ac);
+	ar.tmp.col = NULL;
 	check_error(ar);
 	begin(&ar);
 	ft_libere(ar);
