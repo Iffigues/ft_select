@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_libere.c                                        :+:      :+:    :+:   */
+/*   ft_background.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/15 14:05:34 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/19 13:45:05 by bordenoy         ###   ########.fr       */
+/*   Created: 2019/04/19 10:45:42 by bordenoy          #+#    #+#             */
+/*   Updated: 2019/04/19 10:48:40 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void	ft_libere(t_beg ar)
-{
-	int		i;
-	char	*reset_cmd;
+extern t_beg	g_beg;
 
-	reset_cmd = tgetstr("me", NULL);
-	tputs(reset_cmd, 1, ft_charz);
-	tputs(ar.cap[3].name, 1, ft_charz);
-	tcsetattr(STDERR_FILENO, 0, &ar.oldt);
-	i = 0;
-	if (ar.col)
-	{
-		while (i < ar.col_size)
-		{
-			if (ar.col[i].name)
-				free(ar.col[i].name);
-			i++;
-		}
-		free(ar.col);
-	}
+void	background(void)
+{
+	char    *g;
+
+	g = tgetstr("AB", NULL);
+	tputs(tparm(g, 2), 1, ft_charz);
+	tputs(g_beg.cap[0].name, 1, ft_charz);\
 }

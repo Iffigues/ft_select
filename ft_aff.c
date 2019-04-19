@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:59:46 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/18 07:13:25 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/19 12:22:33 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,14 @@ static void setcolor(int i)
 {
 	char	*af;
 	char	*g;
+	int 	y;
 
+	y = 0;
 	af = tgetstr("AF", NULL);
 	g = tgetstr("AB", NULL);
-	tputs(tparm(af, i), 1, ft_charz);
+	if (i == g_beg.index)
+		y = 4;
+	tputs(tparm(af, y), 1, ft_charz);
 	tputs(tparm(g, 2), 1, ft_charz);
 }
 
@@ -79,6 +83,7 @@ void		aff(void)
 	int 	b;
 
 	get_size();
+	background();
 	if (g_beg. x != 0 && g_beg.y != 0)
 	{
 		if ((a = count_col()) != 0)

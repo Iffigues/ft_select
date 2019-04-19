@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 17:02:39 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/17 21:25:15 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/19 13:04:33 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,41 @@ int	count_raw(void)
 		h = (u / y) + 1;
 	h++;
 	return (h);
+}
+
+void	ft_jump(int a)
+{
+	int	i;
+	int	j;
+
+	j = count_col() * a;
+	i = g_beg.index + j;
+	while (i <= g_beg.col_size && i >= 0 )
+	{
+		if (g_beg.col[i].live == g_beg.mod)
+		{
+			g_beg.index = i;
+			break ;
+		}
+		i += j;
+	}
+}
+
+void	ft_move(int a)
+{
+	int	i;
+	int h;
+
+	h = 1;
+	i  =  g_beg.index + a;
+	while (i <= g_beg.col_size && i >= 0 )
+	{
+		if (g_beg.col[i].live == g_beg.mod)
+		{
+			g_beg.index += (h * a);
+			break ;
+		}
+		i += a;
+		h++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 14:42:58 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/18 01:23:50 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/19 13:45:15 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,25 @@ static size_t	sizer(t_col *col, int nb)
 static void		fleche(unsigned long j)
 {
 	if (j == RIGHT_KEY && g_beg.index < (count_nbr() - 1))
-		g_beg.index++;
+	{
+		ft_move(1);
+		aff();
+	}
 	if (j == LEFT_KEY && g_beg.index > 0)
-		g_beg.index--;
-	if (j == UP_KEY && ((g_beg.index + count_col()) < count_nbr()))
-		g_beg.index++;
-	if (j == DOWN_KEY && ((g_beg.index - count_col()) >= 0))
-		g_beg.index--;
-	count_raw();
+	{
+		ft_move(-1);
+		aff();
+	}
+	if (j == DOWN_KEY && ((g_beg.index + count_col()) < count_nbr()))
+	{
+		ft_jump(1);
+		aff();
+	}
+	if (j == UP_KEY && ((g_beg.index - count_col()) >= 0))
+	{
+		ft_jump(-1);
+		aff();
+	}
 }
 
 static void		action(unsigned long j)
@@ -53,7 +64,7 @@ static void		action(unsigned long j)
 		g_beg.col[g_beg.index].choice = g_beg.col[g_beg.index].choice ^ 1;
 }
 
-static void		commence(void)
+void		commence(void)
 {
 	char			c[8];
 	unsigned long	num;
@@ -81,7 +92,11 @@ void			begin(t_beg *ar)
 	ar->cap[0].name = tgetstr("cl", NULL);
 	ar->cap[1].len = tgetflag("cm");
 	ar->cap[1].name = tgetstr("cm", NULL);
-	tputs(ar->cap[0].name, 1, ft_charz);
+	ar->cap[2].len = tgetflag("vi");
+	ar->cap[2].name = tgetstr("vi", NULL);
+	ar->cap[3].len = tgetflag("ve");
+	ar->cap[3].name = tgetstr("ve", NULL);
+	tputs(ar->cap[2].name, 1, ft_charz);
 	ar->index = 0;
 	ar->mod = 1;
 	ar->max_size = sizer(ar->col, ar->col_size) + 1;
