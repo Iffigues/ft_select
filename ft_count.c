@@ -6,15 +6,13 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 17:02:39 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/19 18:46:47 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/24 17:19:59 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-extern t_beg g_beg;
-
-int	count_nbr(void)
+int		count_nbr(t_beg *b)
 {
 	int y;
 	int h;
@@ -22,101 +20,56 @@ int	count_nbr(void)
 
 	h = 0;
 	y = 0;
-	a = g_beg.mod;
-	if (g_beg.tmp.col)
-	while (y < g_beg.tmp.col_size)
-		if (g_beg.tmp.col[y++].live == a)
-			h++;
+	a = b->mod;
+	if (b->tmp.col)
+		while (y < b->tmp.col_size)
+			if (b->tmp.col[y++].live == a)
+				h++;
 	return (h);
 }
 
-int	count_col(void)
+int		count_col(t_beg *b)
 {
-	return (g_beg.x / g_beg.tmp.max_size);
+	return (b->x / b->tmp.max_size);
 }
 
-int	count_raw(void)
+int		count_raw(t_beg *b)
 {
 	int y;
 	int u;
 	int h;
 
 	h = 0;
-	u = count_nbr();
-	y = count_col();
+	u = count_nbr(b);
+	y = count_col(b);
 	if (y)
 		h = (u / y) + 1;
 	h++;
 	return (h);
 }
 
-void	ft_changer()
-{
-/*	int o;
-
-	o = g_beg.index;
-	while (o <= g_beg.col_size)
-	{
-		if (g_beg.col[o].live == g_beg.mod)
-		{
-			g_beg.index = o;
-			return ;
-		}
-		o++;
-	}
-	o = g_beg.index;
-	while (o >= 0)
-	{
-		if (g_beg.col[o].live == g_beg.mod)
-			 g_beg.index = o;
-		o--;
-	}*/
-}
-
-int	ft_gap(/*int a, int b, int c*/)
-{
-/*	int y;
-
-	y = 0;
-	if (c < 0)
-		while (a != b)
-		{
-			if (g_beg.col[a].live != g_beg.mod)
-				y += 1;
-			a--;
-		}
-	if (c > 0)
-	{
-		while (a != b)
-		{
-			if (g_beg.col[a].live != g_beg.mod)
-				y += 1;
-			a++;
-		}
-	}
-	return (y * c);
-	*/
-	return (1);
-}
-
-void	ft_jump(int a)
+void	ft_jump(int a, t_beg *b)
 {
 	int	i;
 	int o;
 	int	j;
 
-	o = g_beg.tmp.index + a;
-	j = count_col() * a;
-	i = g_beg.tmp.index + j;
-	if (i < g_beg.tmp.col_size && i >= 0)
-		g_beg.tmp.index = i;
+	o = b->tmp.index + a;
+	j = count_col(b) * a;
+	i = b->tmp.index + j;
+	if (i < b->tmp.col_size && i >= 0)
+		b->tmp.index = i;
 }
 
-void	ft_move(int a)
+void	ft_move(int a, t_beg *b)
 {
 	int	i;
 
-	i  =  g_beg.tmp.index + a;
-	if (i < g_beg.tmp.col_size && i >= 0 )
-			g_beg.tmp.index = i;
+	i = b->tmp.index + a;
+	if (i >= b->tmp.col_size)
+		b->tmp.index = 0;
+	else if (i < 0)
+		b->tmp.index = b->tmp.col_size - 1;
+	else if (i < b->tmp.col_size && i >= 0)
+		b->tmp.index = i;
 }

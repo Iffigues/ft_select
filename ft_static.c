@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_static.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/10 04:20:18 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/22 17:05:54 by bordenoy         ###   ########.fr       */
+/*   Created: 2019/04/24 16:02:01 by bordenoy          #+#    #+#             */
+/*   Updated: 2019/04/25 10:54:35 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_select.h"
 
-void	ft_putstr_fd(char const *s, int fd)
+t_beg	*hahaha(t_beg *h, int i)
 {
-	size_t	i;
+	static t_beg *bb = NULL;
 
-	i = 0;
-	if (s)
-	{
-		i = ft_strlen(s);
-		write(fd, s, i);
-	}
+	if (i == 0)
+		bb = h;
+	return (bb);
 }

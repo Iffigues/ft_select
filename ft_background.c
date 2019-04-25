@@ -6,7 +6,7 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 10:45:42 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/19 10:48:40 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/25 10:52:47 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,20 @@
 
 extern t_beg	g_beg;
 
-void	background(void)
+void	background(t_beg *b)
 {
-	char    *g;
+	ft_putstr_fd(tparm(tgetstr("AB", NULL), 2), b->tty);
+	ft_putstr_fd(b->cap[0].name, b->tty);
+}
 
-	g = tgetstr("AB", NULL);
-	tputs(tparm(g, 2), 1, ft_charz);
-	tputs(g_beg.cap[0].name, 1, ft_charz);\
+int		chack(t_beg *b)
+{
+	if (ft_null())
+	{
+		ft_libere(b);
+		exit(0);
+	}
+	cm(b->tmp.index, b);
+	change_mod(b);
+	return (1);
 }

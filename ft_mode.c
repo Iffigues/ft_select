@@ -6,86 +6,93 @@
 /*   By: bordenoy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 16:54:11 by bordenoy          #+#    #+#             */
-/*   Updated: 2019/04/19 20:31:00 by bordenoy         ###   ########.fr       */
+/*   Updated: 2019/04/25 12:49:08 by bordenoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-extern t_beg	g_beg;
-
-void	fun()
+void	fun(t_beg *b)
 {
 	int i;
 
 	i = 0;
-	if (g_beg.tmp.col)
+	if (b->tmp.col)
 	{
-		while (i < g_beg.tmp.col_size)
+		while (i < b->tmp.col_size)
 		{
-			if (g_beg.tmp.col[i].name)
-				free(g_beg.tmp.col[i].name);
+			if (b->tmp.col[i].name)
+				free(b->tmp.col[i].name);
 			i++;
 		}
-		free(g_beg.tmp.col);
+		free(b->tmp.col);
 	}
-	g_beg.tmp.col = NULL;
+	b->tmp.col = NULL;
 }
 
-int static ct()
+int		ct(t_beg *b)
 {
 	int h;
 	int y;
 
 	y = 0;
 	h = 0;
-	while (g_beg.fin.col_size > h)
-	{
-		if (g_beg.fin.col[h].live == g_beg.mod)
-			y++;
-		h++;
-	}
+	if (b->fin.col)
+		while (h < b->fin.col_size)
+		{
+			if (b->fin.col[h].live == b->mod)
+				y++;
+			h++;
+		}
 	return (y);
 }
 
-t_col	*ft_colcpy()
+int		gt(int a, int y)
 {
-	int		i;
+	if (a <= y)
+		return (a - 1);
+	return (y);
+}
+
+t_col	*ft_colcpy(int i, t_beg *b)
+{
 	int		y;
-	int 	u;
-	t_col 	*p;
+	int		u;
+	t_col	*p;
 
 	y = 0;
 	u = 0;
-	i = ct();
 	if (!(p = (t_col *)malloc(sizeof(t_col) * (i))))
 		return (NULL);
-	g_beg.tmp.col_size = i;
-	while (y < g_beg.fin.col_size)
+	b->tmp.col_size = i;
+	while (y < b->fin.col_size)
 	{
-		if (g_beg.fin.col[y].live == g_beg.mod)
+		if (b->fin.col[y].live == b->mod)
 		{
-			p[u].index = g_beg.fin.col[y].index;
-			p[u].live = g_beg.fin.col[y].live;
-			p[u].name = ft_strdup(g_beg.fin.col[y].name);
-			p[u].len = g_beg.fin.col[y].len;
+			p[u].choice = b->fin.col[y].choice;
+			p[u].index = b->fin.col[y].index;
+			p[u].type = b->fin.col[y].type;
+			p[u].live = b->fin.col[y].live;
+			p[u].name = ft_strdup(b->fin.col[y].name);
+			p[u].len = b->fin.col[y].len;
 			u++;
 		}
-		y++;		
+		y++;
 	}
 	return (p);
 }
 
-void change_mod()
+void	change_mod(t_beg *b)
 {
 	t_bag	tmp;
 
-	fun();
-	tmp.index = g_beg.tmp.index;
-	tmp.col = ft_colcpy();
+	fun(b);
+	tmp.col = NULL;
+	tmp.index = 0;
+	tmp.index = gt(ct(b), b->tmp.index);
+	tmp.col_size = ct(b);
+	tmp.col = ft_colcpy(tmp.col_size, b);
 	tmp.max_size = 0;
-	tmp.col_size = ct();
-	g_beg.tmp = tmp;	
-	g_beg.tmp.max_size = sizer() + 1;
-	
+	b->tmp = tmp;
+	b->tmp.max_size = sizer(b) + 1;
 }
